@@ -1,0 +1,30 @@
+link-shortener:
+    short-link-length: 8
+logging:
+    web-request-body-masked-props:
+        - $.body.active
+        - $.body.page.size
+        - $.id
+    execution-log-enabled: true
+    web-request:
+        enabled: true
+        body:
+            enabled: true
+
+
+
+spring:
+    application:
+        name: link-shortener
+    datasource:
+        url: jdbc:postgresql://localhost:5434/mentoring
+        username: dev
+        password: Ab123456
+        hikari:
+            schema: link_shortener
+            connection-init-sql: CREATE SCHEMA IF NOT EXISTS ${spring.datasource.hikari.schema};
+    liquibase:
+        change-log: db/changelog/changelog-master.yml
+    jpa:
+        hibernate:
+            ddl-auto: validate
